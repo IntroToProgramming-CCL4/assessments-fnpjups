@@ -1,0 +1,2 @@
+quote = '“It’s funny how humans can wrap their mind around things and fit them into their version of reality.”' #Assigned to a variable to make it easier to print
+print("Percy Jackson, from the book Percy Jackson: The lightning Thief, once said", quote)
