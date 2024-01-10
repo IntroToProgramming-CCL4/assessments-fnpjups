@@ -77,27 +77,22 @@ def receipt():
 # Function for checkout
 def checkout():
     final_price = final_cart()
-    money = float(
-        input(f"Please enter {final_price} AED to purchase your product: "))  # Asks for the user to input their money
-    if money == final_price:          # Code for when payment is exact
-        final_purchase()
-    elif money > final_price:         # Code for when payment is more than required price
-        change = money - final_price  # Computes the change
-        final_purchase()
-        print(f"Your change is {change} AED. Please come again!")
-    elif money < final_price:  # Code for when payment is insufficient
-        while True:            # Loops until the user inputs the right amount of money
-            print("\nThe amount that you have entered is insufficient")  # Tells the user that the money is insufficient
-            money = float(input(
-                f"Please enter {final_price} AED to purchase your product: "))  # Asks the user to input the right amount again
-            if money == final_price:
-                final_purchase()
+    try:        # If there is an error in the code this code will skip to except ValueError
+        money = float(input(f"Please enter {final_price} AED to purchase your product: "))  # Asks for the user to input their money
+        if money == final_price:          # Code for when payment is exact
+            final_purchase()
+        elif money > final_price:         # Code for when payment is more than required price
+            change = money - final_price  # Computes the change
+            final_purchase()
+            print(f"Your change is {change} AED. Please come again!")
+        elif money < final_price:  # Code for when payment is insufficient
+            while True:            # Loops until the user inputs the right amount of money
+                print("\nThe amount that you have entered is insufficient")  # Tells the user that the money is insufficient
+                checkout()
                 break
-            elif money > final_price:
-                change = money - final_price
-                final_purchase()
-                print(f"Your change is {change} AED. Please come again!")
-                break
+    except ValueError:    # Outcome if the user input is invalid
+            print(f"Sorry we do not accept invalid inputs, please enter a proper form of payment.")
+            checkout()
 
 # Main function which stores all the needed codes to run the vending machine
 def program_run():
